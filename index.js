@@ -5,6 +5,22 @@ const specialcharacters = "!@#$%^&*()_+~`|}{[]\:;?><,./-=";
 
 const allchar = letters + capitalletters + numbers + specialcharacters;
 
+var passwordList = [];
+
+function CheckUnique(password){
+    if(passwordList.includes(password)){
+        return false;
+    }else{
+        passwordList.push(password);
+        return true;
+    }
+}
+
+function SetPasswordList(list){
+    passwordList = list;
+    return true
+}
+
 function GenerateWithControl({lettercount, capitalcount, numbercount, specialcount}){
 
     var chars = "";
@@ -36,7 +52,13 @@ function GenerateWithControl({lettercount, capitalcount, numbercount, specialcou
     }
     password = chars.join("");
 
-    return password;
+    if(CheckUnique(password)){
+        return password;
+    }
+
+    else {
+        return GenerateWithControl({lettercount, capitalcount, numbercount, specialcount});
+    }
 }
 
 function GenerateRandomPassword(length){
@@ -55,7 +77,13 @@ function GenerateRandomPassword(length){
     }
     password = password.join("");
 
-    return password;
+    if(CheckUnique(password)){
+        return password;
+    }
+
+    else {
+        return GenerateRandomPassword(length);
+    }
 }
 
 function GenPassSetChars({length, chars}){
@@ -75,7 +103,19 @@ function GenPassSetChars({length, chars}){
 
     password = password.join("");
 
-    return password;
+    if(CheckUnique(password)){
+        return password;
+    }
+
+    else {
+        GenPassSetChars({length, chars});
+    }
 }
 
-module.exports = {GenerateWithControl, GenerateRandomPassword, GenPassSetChars};
+function GetPass(){
+    return passwordList;
+}
+
+
+
+module.exports = {GenerateWithControl, GenerateRandomPassword, GenPassSetChars, SetPasswordList, GetPass};
