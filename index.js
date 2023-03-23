@@ -1,3 +1,5 @@
+const csprng = require ( 'csprng-num' ) ;
+
 const letters = "abcdefghijklmnopqrstuvwxyz";
 const capitalletters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const numbers = "0123456789";
@@ -27,25 +29,25 @@ function GenerateWithControl({lettercount, capitalcount, numbercount, specialcou
     var password = "";
 
     for(var i = 0; i < lettercount; i++){
-        chars += letters[Math.floor(Math.random() * letters.length)];
+        chars += letters[Math.floor(csprng() * letters.length)];
     }
 
     for(var i = 0; i < capitalcount; i++){
-        chars += capitalletters[Math.floor(Math.random() * capitalletters.length)];
+        chars += capitalletters[Math.floor(csprng() * capitalletters.length)];
     }
 
     for(var i = 0; i < numbercount; i++){
-        chars += numbers[Math.floor(Math.random() * numbers.length)];
+        chars += numbers[Math.floor(csprng() * numbers.length)];
     }
 
     for(var i = 0; i < specialcount; i++){
-        chars += specialcharacters[Math.floor(Math.random() * specialcharacters.length)];
+        chars += specialcharacters[Math.floor(csprng() * specialcharacters.length)];
     }
 
     //shuffle the characters from chars
     chars = chars.split("");
     for(var i = chars.length - 1; i > 0; i--){
-        var j = Math.floor(Math.random() * (i + 1));
+        var j = Math.floor(csprng() * (i + 1));
         var temp = chars[i];
         chars[i] = chars[j];
         chars[j] = temp;
@@ -65,12 +67,12 @@ function GenerateRandomPassword(length){
     var password = "";
 
     for(var i = 0; i < length; i++){
-        password += allchar[Math.floor(Math.random() * allchar.length)];
+        password += allchar[Math.floor(csprng() * allchar.length)];
     }
 
     password = password.split("");
     for(var i = password.length - 1; i > 0; i--){
-        var j = Math.floor(Math.random() * (i + 1));
+        var j = Math.floor(csprng() * (i + 1));
         var temp = password[i];
         password[i] = password[j];
         password[j] = temp;
@@ -90,12 +92,12 @@ function GenPassSetChars({length, chars}){
     var password = "";
 
     for(var i = 0; i < length; i++){
-        password += chars[Math.floor(Math.random() * chars.length)];
+        password += chars[Math.floor(csprng() * chars.length)];
     }
 
     password = password.split("");
     for(var i = password.length - 1; i > 0; i--){
-        var j = Math.floor(Math.random() * (i + 1));
+        var j = Math.floor(csprng() * (i + 1));
         var temp = password[i];
         password[i] = password[j];
         password[j] = temp;
@@ -115,7 +117,5 @@ function GenPassSetChars({length, chars}){
 function GetPass(){
     return passwordList;
 }
-
-
 
 module.exports = {GenerateWithControl, GenerateRandomPassword, GenPassSetChars, SetPasswordList, GetPass};

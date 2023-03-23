@@ -1,6 +1,6 @@
 {
   "name": "rand-gen-pass",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,5 +17,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/kajvan/passwordgen"
+  },
+  "dependencies": {
+    "csprng-num": "^1.0.1"
   }
 }
